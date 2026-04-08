@@ -1,4 +1,5 @@
 import { defineField, defineType, defineArrayMember } from "sanity";
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const galleryImage = defineType({
   name: "galleryImage",
@@ -50,12 +51,7 @@ export const galleryImage = defineType({
       type: "text",
       rows: 3,
     }),
-    defineField({
-      name: "order",
-      title: "Display Order",
-      type: "number",
-      description: "Lower numbers appear first. Leave blank to sort to the end.",
-    }),
+    orderRankField({ type: "galleryImage" }),
   ],
   preview: {
     select: {
@@ -71,14 +67,5 @@ export const galleryImage = defineType({
       };
     },
   },
-  orderings: [
-    {
-      title: "Display Order",
-      name: "orderAsc",
-      by: [
-        { field: "order", direction: "asc" },
-        { field: "_createdAt", direction: "desc" },
-      ],
-    },
-  ],
+  orderings: [orderRankOrdering],
 });
