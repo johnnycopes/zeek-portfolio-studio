@@ -1,50 +1,44 @@
-import { StructureBuilder, StructureResolverContext } from "sanity/structure";
-import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
+import {StructureBuilder, StructureResolverContext} from 'sanity/structure'
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
 export const structure = (S: StructureBuilder, context: StructureResolverContext) =>
   S.list()
-    .title("Content")
+    .title('Content')
     .items([
       S.listItem()
-        .title("Work")
+        .title('Work')
         .child(
           S.list()
-            .title("Gallery Images")
+            .title('Gallery Images')
             .items([
-              orderableDocumentListDeskItem({ type: "galleryImage", title: "Sort Order", S, context }),
+              orderableDocumentListDeskItem({
+                type: 'galleryImage',
+                title: 'Sort Order',
+                S,
+                context,
+              }),
               S.divider(),
               S.listItem()
-                .title("Alphabetical")
+                .title('Alphabetical')
                 .child(
                   S.documentList()
-                    .title("Alphabetical")
-                    .schemaType("galleryImage")
+                    .title('Alphabetical')
+                    .schemaType('galleryImage')
                     .filter('_type == "galleryImage"')
-                    .defaultOrdering([{ field: "title", direction: "asc" }])
+                    .defaultOrdering([{field: 'title', direction: 'asc'}]),
                 ),
-            ])
+            ]),
         ),
-      S.divider(),
       S.listItem()
-        .title("About")
+        .title('About')
         .child(
           S.list()
-            .title("About")
+            .title('About')
             .items([
               S.listItem()
-                .title("About")
-                .child(
-                  S.document().schemaType("aboutPage").documentId("aboutPage")
-                ),
-              S.listItem()
-                .title("Services")
-                .child(S.documentTypeList("service").title("Services")),
-            ])
+                .title('About')
+                .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
+              S.listItem().title('Services').child(S.documentTypeList('service').title('Services')),
+            ]),
         ),
-      S.divider(),
-      S.listItem()
-        .title("Site Settings")
-        .child(
-          S.document().schemaType("siteSettings").documentId("siteSettings")
-        ),
-    ]);
+    ])
