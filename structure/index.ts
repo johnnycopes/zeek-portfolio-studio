@@ -26,12 +26,20 @@ export const structure = (S: StructureBuilder, context: StructureResolverContext
         ),
       S.divider(),
       S.listItem()
-        .title("Services")
-        .child(S.documentTypeList("service").title("Services")),
-      S.listItem()
-        .title("About Page")
+        .title("About")
         .child(
-          S.document().schemaType("aboutPage").documentId("aboutPage")
+          S.list()
+            .title("About")
+            .items([
+              S.listItem()
+                .title("About")
+                .child(
+                  S.document().schemaType("aboutPage").documentId("aboutPage")
+                ),
+              S.listItem()
+                .title("Services")
+                .child(S.documentTypeList("service").title("Services")),
+            ])
         ),
       S.divider(),
       S.listItem()

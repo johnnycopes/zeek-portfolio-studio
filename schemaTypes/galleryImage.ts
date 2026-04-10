@@ -1,4 +1,4 @@
-import { defineField, defineType, defineArrayMember } from "sanity";
+import { defineField, defineType } from "sanity";
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 
 export const galleryImage = defineType({
@@ -21,48 +21,16 @@ export const galleryImage = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: "client",
-      title: "Client",
-      type: "string",
-    }),
-    defineField({
-      name: "tags",
-      title: "Tags",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "string",
-        }),
-      ],
-      options: {
-        list: [
-          { title: "Branding", value: "branding" },
-          { title: "Illustration", value: "illustration" },
-          { title: "Packaging", value: "packaging" },
-          { title: "Lettering", value: "lettering" },
-          { title: "Merch", value: "merch" },
-        ],
-      },
-    }),
-    defineField({
-      name: "description",
-      title: "Description",
-      type: "text",
-      rows: 3,
-    }),
     orderRankField({ type: "galleryImage" }),
   ],
   preview: {
     select: {
       title: "title",
-      client: "client",
       media: "image",
     },
-    prepare({ title, client, media }) {
+    prepare({ title, media }) {
       return {
         title,
-        subtitle: client ?? "",
         media,
       };
     },
