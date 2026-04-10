@@ -13,6 +13,15 @@ export const siteSettings = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "logo",
+      title: "Logo",
+      type: "image",
+      description: "Header logo image. Replaces the site title text in the navigation.",
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: "tagline",
       title: "Tagline",
       type: "string",
